@@ -17,6 +17,12 @@ import java.io.PrintWriter;
 @RequestMapping(value = "/form")
 public class FormController {
 
+    @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
+    @ResponseBody
+    public String sayHello() {
+        return "Hello";
+    }
+
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @ResponseBody
     public void formSubmit(String name , String fave, String city, HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -17,18 +17,12 @@ import java.io.PrintWriter;
 @RequestMapping(value = "/form")
 public class FormController {
 
-    @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
-    @ResponseBody
-    public String sayHello() {
-        return "Hello";
-    }
-
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @ResponseBody
     public void formSubmit(String name , String fave, String city, HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("gb2312");//通知服务器发送数据时查阅的码表
-        response.setContentType("text/html;charset=gb2312");//通知浏览器以何种码表打开
+        response.setCharacterEncoding("gb2312");
+        response.setContentType("text/html;charset=gb2312");
         PrintWriter printWriter = response.getWriter();
         String form = "<!DOCTYPE html>" +
                         "<html>" +

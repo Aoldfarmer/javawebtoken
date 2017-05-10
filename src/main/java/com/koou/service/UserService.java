@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface UserService {
 
-    List<UserListResponseDto> queryUserList();
+//    List<UserListResponseDto> queryUserList();
 }

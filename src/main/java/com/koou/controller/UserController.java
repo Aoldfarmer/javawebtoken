@@ -22,9 +22,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<UserListResponseDto> getUsers() {
-        return userService.queryUserList();
-    }
+//    @RequestMapping(method = RequestMethod.GET)
+//    public List<UserListResponseDto> getUsers() {
+//        return userService.queryUserList();
+//    }
 
 }

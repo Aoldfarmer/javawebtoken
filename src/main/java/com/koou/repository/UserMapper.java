@@ -1,20 +1,30 @@
 package com.koou.repository;
 
-import com.koou.dto.response.UserListResponseDto;
-import org.apache.ibatis.annotations.Mapper;
-
+import com.koou.domain.User;
+import com.koou.domain.UserExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * Description: user操作数据库类.
- *
- * @author yunqiangdi
- * @version 1.0
- * @since 2017-05-10 4:56 PM
- */
-@Mapper
 public interface UserMapper {
+    int countByExample(UserExample example);
 
-    List<UserListResponseDto> queryUserList();
+    int deleteByExample(UserExample example);
 
+    int deleteByPrimaryKey(Integer userId);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Integer userId);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

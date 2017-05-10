@@ -1,7 +1,7 @@
 package com.koou.service.impl;
 
-import com.koou.repository.UserMapper;
 import com.koou.dto.response.UserListResponseDto;
+import com.koou.repository.UserMapper;
 import com.koou.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +18,10 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserMapper userDao;
+    private UserMapper userMapper;
 
-    @Override
-    public List<UserListResponseDto> queryUserList() {
-        return userDao.queryUserList();
-    }
+//    @Override
+//    public List<UserListResponseDto> queryUserList() {
+//        return userMapper.queryUserList();
+//    }
 }

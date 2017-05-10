@@ -21,9 +21,9 @@ public class DataSourcesConfig {
     @Bean(name = "dataSource", destroyMethod = "close")
     public DruidDataSource Construction() throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/sampledb");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/beauty");
         dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setPassword("di2chen@2017");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setMaxActive(20);
         dataSource.setInitialSize(1);

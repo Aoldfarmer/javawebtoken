@@ -1,13 +1,11 @@
 package com.koou.controller;
 
-import com.koou.dto.response.UserListResponseDto;
+import com.koou.domain.User;
 import com.koou.service.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Description: userController.
@@ -22,9 +20,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public List<UserListResponseDto> getUsers() {
-//        return userService.queryUserList();
-//    }
+    @PostMapping
+    @ApiOperation(value = "创建用户", httpMethod = "POST", notes = "创建用户")
+    public String addUser(@RequestBody User user) {
+        userService.addUser(user);
+        return "success";
+    }
+
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")
+    public User getUser(@PathVariable Integer id) {
+        return userService.getUserByPrimaryKey(id);
+    }
+
 
 }

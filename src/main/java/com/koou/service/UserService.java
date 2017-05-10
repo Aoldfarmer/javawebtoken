@@ -1,8 +1,6 @@
 package com.koou.service;
 
-import com.koou.dto.response.UserListResponseDto;
-
-import java.util.List;
+import com.koou.domain.User;
 
 /**
  * Description: user类Service.
@@ -13,5 +11,7 @@ import java.util.List;
  */
 public interface UserService {
 
-//    List<UserListResponseDto> queryUserList();
+    void addUser(User user);
+
+    User getUserByPrimaryKey(int id);
 }

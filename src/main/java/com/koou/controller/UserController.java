@@ -1,8 +1,8 @@
 package com.koou.controller;
 
+import com.koou.common.AbstractController;
 import com.koou.domain.User;
 import com.koou.service.UserService;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(value = "/users")
-public class UserController {
+public class UserController extends AbstractController {
     @Autowired
     private UserService userService;
 
@@ -32,6 +32,5 @@ public class UserController {
     public User getUser(@PathVariable Integer id) {
         return userService.getUserByPrimaryKey(id);
     }
-
 
 }

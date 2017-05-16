@@ -8,9 +8,11 @@ package com.koou.common.constant;
  */
 public final class ResultCode {
 
+    public static final String ACK = "ACK";
+    public static final String NACK = "NACK";
+
     private ResultCode() {
     }
 
-    public static final String ACK = "ACK";
-    public static final String NACK = "NACK";
+
 }

@@ -23,16 +23,16 @@ public final class ResultDtoFactory {
         return result;
     }
 
-    public static <T extends Serializable> ResultDto<T> toACK (String message) {
-        return toACK(message, null);
-    }
-
     public static <T extends Serializable> ResultDto<T> toNACK (String message, T data) {
         ResultDto<T> result = new ResultDto<>();
         result.setCode(ResultCode.NACK);
         result.setMessage(message);
         result.setData(data);
         return result;
+    }
+
+    public static <T extends Serializable> ResultDto<T> toACK (String message) {
+        return toACK(message, null);
     }
 
     public <T extends Serializable> ResultDto<T> toNACK (String message) {

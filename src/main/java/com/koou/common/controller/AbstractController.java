@@ -14,7 +14,7 @@ public abstract class AbstractController {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 
-    public String currentUserName() {
+    public String getCurrentUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

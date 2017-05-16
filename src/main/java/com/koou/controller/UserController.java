@@ -1,6 +1,8 @@
 package com.koou.controller;
 
 import com.koou.common.controller.AbstractController;
+import com.koou.common.dto.ResultDto;
+import com.koou.common.dto.ResultDtoFactory;
 import com.koou.domain.User;
 import com.koou.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -24,15 +26,15 @@ public class UserController extends AbstractController {
 
     @PostMapping
     @ApiOperation(value = "创建用户", httpMethod = "POST", notes = "创建用户")
-    public String addUser(@RequestBody User user) {
+    public ResultDto<String> addUser(@RequestBody User user) {
         userService.addUser(user);
-        return "success";
+        return ResultDtoFactory.toACK("success");
     }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")
-    public User getUser(@PathVariable Integer id) {
-        return userService.getUserByPrimaryKey(id);
+    public ResultDto<User> getUser(@PathVariable Integer id) {
+        return ResultDtoFactory.toACK("success", userService.getUserByPrimaryKey(id));
     }
 
 }

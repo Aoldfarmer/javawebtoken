@@ -10,13 +10,10 @@ import java.io.Serializable;
  * @since 2017-05-16 12:35 PM
  */
 @Data
-public class ResultDto<T> implements Serializable {
+public class ResultDto<T extends Serializable> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private String code;
-
     private String message;
-
     private T data;
 }

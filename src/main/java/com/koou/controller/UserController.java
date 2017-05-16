@@ -4,6 +4,7 @@ import com.koou.common.controller.AbstractController;
 import com.koou.domain.User;
 import com.koou.service.UserService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController extends AbstractController {
-    
+
     @Autowired
     private UserService userService;
 

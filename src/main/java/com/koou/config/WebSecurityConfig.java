@@ -25,7 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(ignoreSwagger).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-//                    .loginPage("/login")
                     .failureUrl("/login?error")
                     .defaultSuccessUrl("/index")
                     .permitAll();

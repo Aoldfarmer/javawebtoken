@@ -1,4 +1,4 @@
-package com.koou.common;
+package com.koou.common.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 

@@ -1,6 +1,6 @@
 package com.koou.controller;
 
-import com.koou.common.AbstractController;
+import com.koou.common.controller.AbstractController;
 import com.koou.domain.User;
 import com.koou.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController extends AbstractController {
+    
     @Autowired
     private UserService userService;
 

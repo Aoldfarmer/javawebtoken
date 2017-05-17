@@ -1,8 +1,8 @@
-#Mybatis XML PATH
+#Mybatis Xml Path
 mybatis:
   mapperLocations: classpath:mapper/*.xml
 
-#THYMELEAF CONFIG
+#Thymeleaf Config
 spring:
   thymeleaf:
     prefix: classpath:/templates/
@@ -11,3 +11,8 @@ spring:
     encoding: UTF-8
     content-type: text/html
     cache: false
+
+
+
+
+

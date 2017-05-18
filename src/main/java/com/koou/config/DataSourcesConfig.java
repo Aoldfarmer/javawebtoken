@@ -1,7 +1,6 @@
 package com.koou.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.util.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

@@ -1,9 +1,7 @@
 package com.koou.service;
 
 import com.koou.domain.User;
-import com.koou.dto.response.Hero;
 
-import java.util.List;
 
 /**
  * Description: user类Service.
@@ -18,5 +16,4 @@ public interface UserService {
 
     User getUserByPrimaryKey(int id);
 
-    List<Hero> queryAll();
 }

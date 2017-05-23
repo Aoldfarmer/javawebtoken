@@ -20,8 +20,8 @@
         </jdbcConnection>
         -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/sampledb"
-                        userId="root" password="root">
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/beauty"
+                        userId="root" password="di2chen@2017">
         </jdbcConnection>
 
         <javaTypeResolver>

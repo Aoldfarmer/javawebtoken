@@ -33,7 +33,7 @@ public class UserController extends AbstractController {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")
-    public ResultDto<User> getUser(@PathVariable Integer id) {
+    public ResultDto<User> getUser(@PathVariable Long id) {
         return ResultDtoFactory.toACK("success", userService.getUserByPrimaryKey(id));
     }
 

@@ -14,6 +14,6 @@ public interface UserService {
 
     void addUser(User user);
 
-    User getUserByPrimaryKey(int id);
+    User getUserByPrimaryKey(long id);
 
 }

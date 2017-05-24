@@ -18,6 +18,6 @@ public class LoginController {
 
     @GetMapping("/index")
     public String index() {
-        return "/dist/index";
+        return "/index";
     }
 }

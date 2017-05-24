@@ -1,8 +1,6 @@
-#Mybatis Xml Path
 mybatis:
   mapperLocations: classpath:mapper/*.xml
 
-#Thymeleaf Config
 spring:
   thymeleaf:
     prefix: classpath:/templates/

@@ -8,13 +8,16 @@ public class User implements Serializable {
 
     private String userName;
 
+    private String password;
+
     private Date loginTime;
 
     private static final long serialVersionUID = 1L;
 
-    public User(Long id, String userName, Date loginTime) {
+    public User(Long id, String userName, String password, Date loginTime) {
         this.id = id;
         this.userName = userName;
+        this.password = password;
         this.loginTime = loginTime;
     }
 
@@ -36,6 +39,14 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public Date getLoginTime() {
@@ -60,6 +71,7 @@ public class User implements Serializable {
         User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
+            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getLoginTime() == null ? other.getLoginTime() == null : this.getLoginTime().equals(other.getLoginTime()));
     }
 
@@ -69,6 +81,7 @@ public class User implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
+        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getLoginTime() == null) ? 0 : getLoginTime().hashCode());
         return result;
     }

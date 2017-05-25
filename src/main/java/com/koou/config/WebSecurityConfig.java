@@ -3,6 +3,7 @@ package com.koou.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private String[] ignoreSwagger = {"/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
@@ -24,10 +26,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(ignoreSwagger).permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin()
+                .and()
+                    .formLogin()
                     .failureUrl("/login?error")
                     .defaultSuccessUrl("/index")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .logout();
     }
 
     @Autowired
@@ -35,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("yunqiangdi2")
                 .password("di2chen@2017")
-                .roles("USER");
+                .roles("USER1");
     }
 
 }

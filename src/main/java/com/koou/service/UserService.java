@@ -1,6 +1,7 @@
 package com.koou.service;
 
 import com.koou.domain.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 
 /**
@@ -14,6 +15,7 @@ public interface UserService {
 
     void addUser(User user);
 
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     User getUserByPrimaryKey(long id);
 
 }

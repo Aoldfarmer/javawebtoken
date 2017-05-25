@@ -5,11 +5,12 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, login_time
+    id, user_name, password, login_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,10 +23,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.koou.domain.User">
-    insert into user (id, user_name, login_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}
-      )
+    insert into user (id, user_name, password, 
+      login_time)
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.koou.domain.User">
     insert into user
@@ -35,6 +36,9 @@
       </if>
       <if test="userName != null">
         user_name,
+      </if>
+      <if test="password != null">
+        password,
       </if>
       <if test="loginTime != null">
         login_time,
@@ -47,6 +51,9 @@
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
       <if test="loginTime != null">
         #{loginTime,jdbcType=TIMESTAMP},
       </if>
@@ -58,6 +65,9 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
       <if test="loginTime != null">
         login_time = #{loginTime,jdbcType=TIMESTAMP},
       </if>
@@ -67,6 +77,7 @@
   <update id="updateByPrimaryKey" parameterType="com.koou.domain.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       login_time = #{loginTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

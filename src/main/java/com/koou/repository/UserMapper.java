@@ -1,7 +1,6 @@
 package com.koou.repository;
 
 import com.koou.domain.User;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,5 +15,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User selectByUserName(@Param("userName") String userName);
+
 }

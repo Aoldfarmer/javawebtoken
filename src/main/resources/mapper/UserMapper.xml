@@ -3,91 +3,82 @@
 <mapper namespace="com.koou.repository.UserMapper">
   <resultMap id="BaseResultMap" type="com.koou.domain.User">
     <constructor>
-      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <idArg column="ID" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="USERNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOGIN_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, password, login_time
+    ID, USERNAME, PASSWORD, LOGIN_DATE
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where id = #{id,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user
-    where id = #{id,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.koou.domain.User">
-    insert into user (id, user_name, password, 
-      login_time)
-    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{loginTime,jdbcType=TIMESTAMP})
+    insert into user (ID, USERNAME, PASSWORD, 
+      LOGIN_DATE)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{loginDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.koou.domain.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        id,
+        ID,
       </if>
-      <if test="userName != null">
-        user_name,
+      <if test="username != null">
+        USERNAME,
       </if>
       <if test="password != null">
-        password,
+        PASSWORD,
       </if>
-      <if test="loginTime != null">
-        login_time,
+      <if test="loginDate != null">
+        LOGIN_DATE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="loginTime != null">
-        #{loginTime,jdbcType=TIMESTAMP},
+      <if test="loginDate != null">
+        #{loginDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.koou.domain.User">
     update user
     <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+        PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="loginTime != null">
-        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      <if test="loginDate != null">
+        LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.koou.domain.User">
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      login_time = #{loginTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByUserName" parameterType="String" resultType="com.koou.domain.User">
-    select
-    id as id,
-    user_name as userName,
-    password as password,
-    login_time as loginTime
-    from user
-    where user_name = #{userName,jdbcType=VARCHAR}
-  </select>
 </mapper>

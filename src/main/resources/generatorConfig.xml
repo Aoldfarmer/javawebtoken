@@ -39,7 +39,7 @@
         </javaClientGenerator>
 
 
-        <table schema="mybatis" tableName="user" domainObjectName="User"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        <table schema="mybatis" tableName="user_role" domainObjectName="UserRole"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false">
             <property name="constructorBased" value="true" />
             <property name="useActualColumnNames" value="false" />

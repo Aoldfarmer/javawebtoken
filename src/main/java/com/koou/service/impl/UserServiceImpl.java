@@ -1,6 +1,7 @@
 package com.koou.service.impl;
 
 import com.koou.domain.User;
+import com.koou.model.UserDetail;
 import com.koou.repository.UserMapper;
 import com.koou.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByPrimaryKey(long id) {
+    public User getById(long id) {
         return userMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public UserDetail getByUserName(String userName) {
+        User foundUser =  userMapper.selectByUserName(userName);
+        UserDetail userDetail = new UserDetail();
+        userDetail.setId(foundUser.getId());
+        userDetail.setUserName(foundUser.getUserName());
+        userDetail.setLoginTime(foundUser.getLoginTime());
+        userDetail.setPassword(foundUser.getPassword());
+        return userDetail;
+    }
 }

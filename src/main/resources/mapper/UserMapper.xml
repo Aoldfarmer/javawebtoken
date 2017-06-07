@@ -81,4 +81,13 @@
       login_time = #{loginTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByUserName" parameterType="String" resultType="com.koou.domain.User">
+    select
+    id as id,
+    user_name as userName,
+    password as password,
+    login_time as loginTime
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
 </mapper>

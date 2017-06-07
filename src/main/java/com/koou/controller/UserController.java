@@ -6,7 +6,6 @@ import com.koou.common.dto.ResultDtoFactory;
 import com.koou.domain.User;
 import com.koou.service.UserService;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class UserController extends AbstractController {
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")
     public ResultDto<User> getUser(@PathVariable Long id) {
-        return ResultDtoFactory.toACK("success", userService.getUserByPrimaryKey(id));
+        return ResultDtoFactory.toACK("success", userService.getById(id));
     }
 
 }

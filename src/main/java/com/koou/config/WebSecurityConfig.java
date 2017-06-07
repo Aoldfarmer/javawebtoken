@@ -7,6 +7,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import com.koou.common.security.CustomUserDetailManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.annotation.Resource;
 
 /**
  * @author koou
@@ -20,6 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private String[] ignoreSwagger = {"/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
             "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-resources/configuration/security"};
+
+    @Autowired
+    private CustomUserDetailManager customUserDetailManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,10 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("yunqiangdi2")
-                .password("di2chen@2017")
-                .roles("USER1");
+        auth.userDetailsService(customUserDetailManager)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
 }

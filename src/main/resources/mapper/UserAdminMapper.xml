@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koou.repository.UserAdminMapper">
+  <select id="selectByUserName" parameterType="String" resultType="com.koou.domain.User">
+    select
+    ID as id,
+    USERNAME as userName,
+    PASSWORD as password,
+    LOGIN_DATE as loginDate
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+</mapper>

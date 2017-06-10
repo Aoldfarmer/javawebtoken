@@ -1,12 +1,13 @@
 package com.koou.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.koou.domain.User;
-import com.koou.model.UserDetail;
+import com.koou.model.UserInfo;
 import com.koou.repository.UserAdminMapper;
 import com.koou.repository.UserMapper;
 import com.koou.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Description: userService实现.
@@ -34,13 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetail getByUserName(String userName) {
-        User foundUser =  userAdminMapper.selectByUserName(userName);
-        UserDetail userDetail = new UserDetail();
-        userDetail.setId(foundUser.getId());
-        userDetail.setUsername(foundUser.getUsername());
-        userDetail.setLoginDate(foundUser.getLoginDate());
-        userDetail.setPassword(foundUser.getPassword());
-        return userDetail;
+    public UserInfo getByUsername(String username) {
+        return userAdminMapper.selectUserInfoByUsername(username);
     }
 }

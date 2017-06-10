@@ -1,7 +1,8 @@
 package com.koou.repository;
 
-import com.koou.domain.User;
 import org.apache.ibatis.annotations.Param;
+
+import com.koou.model.UserInfo;
 
 /**
  * @author yunqiangdi
@@ -10,5 +11,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserAdminMapper {
 
-    User selectByUserName(@Param("userName") String userName);
+    UserInfo selectUserInfoByUsername(@Param("username") String username);
 }

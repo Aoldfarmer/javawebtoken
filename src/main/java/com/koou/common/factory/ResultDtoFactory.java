@@ -1,6 +1,7 @@
-package com.koou.common.dto;
+package com.koou.common.factory;
 
 import com.koou.common.constant.ResultCode;
+import com.koou.common.dto.ResultDto;
 
 import java.io.Serializable;
 
@@ -35,7 +36,7 @@ public final class ResultDtoFactory {
         return toACK(message, null);
     }
 
-    public <T extends Serializable> ResultDto<T> toNACK (String message) {
+    public static <T extends Serializable> ResultDto<T> toNACK (String message) {
         return toNACK(message, null);
     }
 }

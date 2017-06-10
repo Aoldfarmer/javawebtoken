@@ -3,6 +3,37 @@ mybatis:
 
 
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/beauty
+    username: root
+    password: di2chen@2017
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  profiles:
+    active:
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer "
+  route:
+    authentication:
+
+server:
+  port: 8888
+
+
+
+
 
 
 

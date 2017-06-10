@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koou.repository.UserAdminMapper">
-  <select id="selectByUserName" parameterType="String" resultType="com.koou.domain.User">
+  <resultMap id="UserInfoMap" type="com.koou.model.UserInfo">
+    <id column="id" property="id"/>
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+    <result column="loginDate" property="loginDate"/>
+    <collection property="roles" ofType="string">
+      <result column="role" property="role"/>
+    </collection>
+  </resultMap>
+  <select id="selectUserInfoByUsername" parameterType="String" resultMap="UserInfoMap">
     select
-    ID as id,
-    USERNAME as userName,
-    PASSWORD as password,
-    LOGIN_DATE as loginDate
-    from user
-    where user_name = #{userName,jdbcType=VARCHAR}
+    u.ID as id,
+    u.USERNAME as username,
+    u.PASSWORD as password,
+    u.LOGIN_DATE as loginDate,
+    o.ROLE as role
+    from user u
+    left join user_role r on r.USER_ID = u.ID
+    left join role o on o.id = r.ROLE_ID
+    where u.USERNAME = #{username,jdbcType=VARCHAR}
   </select>
 </mapper>

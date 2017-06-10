@@ -1,7 +1,7 @@
 package com.koou.service;
 
 import com.koou.domain.User;
-import com.koou.model.UserDetail;
+import com.koou.model.UserInfo;
 
 
 /**
@@ -17,6 +17,5 @@ public interface UserService {
 
     User getById(long id);
 
-    UserDetail getByUserName(String userName);
-
+    UserInfo getByUsername(String username);
 }

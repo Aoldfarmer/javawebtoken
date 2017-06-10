@@ -15,7 +15,7 @@ public abstract class AbstractController {
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 
-    public String getCurrentUserName() {
+    protected String getCurrentUserName() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
             return ((UserDetails) principal).getUsername();

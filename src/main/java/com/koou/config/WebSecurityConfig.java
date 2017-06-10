@@ -1,5 +1,6 @@
 package com.koou.config;
 
+import com.koou.common.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,12 +8,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import com.koou.common.security.CustomUserDetailManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.annotation.Resource;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author koou
@@ -24,31 +23,30 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private String[] ignoreSwagger = {"/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
+    private String[] ignoreSwagger = {"/", "/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
             "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-resources/configuration/security"};
 
     @Autowired
-    private CustomUserDetailManager customUserDetailManager;
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers(ignoreSwagger).permitAll()
-                .anyRequest()
-                .authenticated()
+        http.csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
-                .formLogin()
-                    .failureUrl("/login?error")
-                    .defaultSuccessUrl("/index")
-                    .permitAll()
-                .and()
-                    .logout();
+                    .authorizeRequests()
+                    .antMatchers(ignoreSwagger).permitAll()
+                    .antMatchers("/auth/**").permitAll()
+                    .anyRequest().authenticated();
+        http.headers().cacheControl();
+        http.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailManager)
-                .passwordEncoder(new BCryptPasswordEncoder());
+    public void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(this.userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+
+
 
 }

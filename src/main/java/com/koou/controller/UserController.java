@@ -1,6 +1,7 @@
 package com.koou.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.koou.common.controller.AbstractController;
@@ -32,7 +33,9 @@ public class UserController extends AbstractController {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResultDto<User> getUser(@PathVariable Long id) {
+
         return ResultDtoFactory.toACK("success", userService.getById(id));
     }
 

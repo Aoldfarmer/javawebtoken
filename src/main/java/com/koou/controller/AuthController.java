@@ -26,23 +26,26 @@ public class AuthController {
     @Value("${jwt.header}")
     private String tokenHeader;
 
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
+
     @Autowired
     private AuthService authService;
 
     @PostMapping(value = "/auth")
     public ResultDto<String> createAuthenticationToken(@RequestBody LoginRequestDto loginRequestDto) {
         final String token = authService.login(loginRequestDto.getUsername(), loginRequestDto.getPassword());
-        return ResultDtoFactory.toACK(token);
+        return ResultDtoFactory.toACK("success", token);
     }
 
     @GetMapping(value = "/refresh")
     public ResultDto<String> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
-        String refreshedToken = authService.refresh(token);
-        if(refreshedToken == null) {
+        String refreshedToken = authService.refresh(token).substring(tokenHead.length());
+        if (refreshedToken == null) {
             return ResultDtoFactory.toNACK(null);
         } else {
-            return ResultDtoFactory.toACK(token);
+            return ResultDtoFactory.toACK("success", token);
         }
     }
 

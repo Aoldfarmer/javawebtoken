@@ -46,11 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers(ignoreSwagger).permitAll()
                     .antMatchers(ignoreAuthPath).permitAll()
+                    .anyRequest().authenticated()
                     .and()
-                    .formLogin().permitAll()
-                    .and()
-                    .authorizeRequests()
-                    .anyRequest().authenticated();
+                    .formLogin().permitAll();
         http.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.headers().cacheControl();
     }

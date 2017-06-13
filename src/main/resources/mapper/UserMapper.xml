@@ -7,10 +7,11 @@
       <arg column="USERNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="LOGIN_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="LAST_PASSWORD_RESET_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    ID, USERNAME, PASSWORD, LOGIN_DATE
+    ID, USERNAME, PASSWORD, LOGIN_DATE, LAST_PASSWORD_RESET_DATE
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -24,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="com.koou.domain.User">
     insert into user (ID, USERNAME, PASSWORD, 
-      LOGIN_DATE)
+      LOGIN_DATE, LAST_PASSWORD_RESET_DATE)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{loginDate,jdbcType=TIMESTAMP})
+      #{loginDate,jdbcType=TIMESTAMP}, #{lastPasswordResetDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.koou.domain.User">
     insert into user
@@ -43,6 +44,9 @@
       <if test="loginDate != null">
         LOGIN_DATE,
       </if>
+      <if test="lastPasswordResetDate != null">
+        LAST_PASSWORD_RESET_DATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -56,6 +60,9 @@
       </if>
       <if test="loginDate != null">
         #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPasswordResetDate != null">
+        #{lastPasswordResetDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -71,6 +78,9 @@
       <if test="loginDate != null">
         LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="lastPasswordResetDate != null">
+        LAST_PASSWORD_RESET_DATE = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -78,7 +88,9 @@
     update user
     set USERNAME = #{username,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
-      LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP}
+      LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
+      LAST_PASSWORD_RESET_DATE = #{lastPasswordResetDate,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

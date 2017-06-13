@@ -1,6 +1,5 @@
 package com.koou.config;
 
-import com.koou.common.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.koou.common.filter.JwtAuthenticationFilter;
+import com.koou.common.security.JwtAuthenticationEntryPoint;
 
 /**
  * @author koou
@@ -26,20 +28,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private String[] ignoreSwagger = {"/", "/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
             "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-resources/configuration/security"};
 
+
+    private String[] ignoreAuthPath = {"/auth", "/auth/**"};
+
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                    .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                    .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .authorizeRequests()
                     .antMatchers(ignoreSwagger).permitAll()
-                    .antMatchers("/auth/**").permitAll()
+                    .antMatchers(ignoreAuthPath).permitAll()
+                    .and()
+                    .formLogin().permitAll()
+                    .and()
+                    .authorizeRequests()
                     .anyRequest().authenticated();
-        http.headers().cacheControl();
         http.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.headers().cacheControl();
     }
 
     @Autowired

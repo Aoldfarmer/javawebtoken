@@ -125,8 +125,10 @@ public class JwtTokenUtil {
     public Boolean validateToken(String token, UserDetails userDetails) {
         JwtUser user = (JwtUser) userDetails;
         final String username = getUsernameFromToken(token);
+        final Date created = getCreatedDateFromToken(token);
         return (
                 username.equals(user.getUsername())
-                        && !isTokenExpired(token));
+                        && !isTokenExpired(token)
+                        && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
     }
 }

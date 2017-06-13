@@ -6,6 +6,7 @@
     <result column="username" property="username"/>
     <result column="password" property="password"/>
     <result column="loginDate" property="loginDate"/>
+    <result column="lastPasswordResetDate" property="lastPasswordResetDate"/>
     <collection property="roles" ofType="string">
       <result column="role" property="role"/>
     </collection>
@@ -16,7 +17,8 @@
     u.USERNAME as username,
     u.PASSWORD as password,
     u.LOGIN_DATE as loginDate,
-    o.ROLE as role
+    o.ROLE as role,
+    u.LAST_PASSWORD_RESET_DATE as lastPasswordResetDate
     from user u
     left join user_role r on r.USER_ID = u.ID
     left join role o on o.id = r.ROLE_ID

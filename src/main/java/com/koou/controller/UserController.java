@@ -2,7 +2,10 @@ package com.koou.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.koou.common.controller.AbstractController;
 import com.koou.common.dto.ResultDto;
@@ -24,12 +27,7 @@ public class UserController extends AbstractController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    @ApiOperation(value = "创建用户", httpMethod = "POST", notes = "创建用户")
-    public ResultDto<String> addUser(@RequestBody User user) {
-        userService.addUser(user);
-        return ResultDtoFactory.toACK("success");
-    }
+
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")

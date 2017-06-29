@@ -9,7 +9,7 @@ import com.koou.domain.User;
  */
 public interface AuthService {
 
-    void register(User user);
+    User register(User user);
 
     String login(String username, String password);
 

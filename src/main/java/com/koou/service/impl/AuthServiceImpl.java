@@ -1,7 +1,7 @@
 package com.koou.service.impl;
 
+import com.koou.config.PropertyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,21 +33,21 @@ public class AuthServiceImpl implements AuthService {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserService userService;
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
+
 
 
 
     @Override
-    public void register(User user) {
+    public User register(User user) {
         final String username = user.getUsername();
-        if(userService.getByUsername(username)!=null) {
-            return ;
+        if (userService.getByUsername(username) != null) {
+            return null;
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         final String rawPassword = user.getPassword();
         user.setPassword(encoder.encode(rawPassword));
         userService.addUser(user);
+        return user;
     }
 
     @Override
@@ -56,13 +56,12 @@ public class AuthServiceImpl implements AuthService {
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        return token;
+        return jwtTokenUtil.generateToken(userDetails);
     }
 
     @Override
     public String refresh(String oldToken) {
-        final String token = oldToken.substring(tokenHead.length());
+        final String token = oldToken.substring(PropertyConfig.JwtConfig.TOKEN_HEAD.length());
         String username = jwtTokenUtil.getUsernameFromToken(token);
         JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())){

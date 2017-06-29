@@ -22,13 +22,13 @@ spring:
 
 jwt:
   header: Authorization
-  secret: mySecret
-  expiration: 300
+  secret: mySecrets
+  expiration: 20
   tokenHead: "Bearer "
 
 
 server:
-  port: 8888
+  port: 8800
 
 
 

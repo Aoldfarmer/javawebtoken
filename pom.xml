@@ -66,8 +66,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.40</version>
-		</dependency>
+			</dependency>
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -78,7 +77,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.10</version>
 		</dependency>
 
 		<dependency>

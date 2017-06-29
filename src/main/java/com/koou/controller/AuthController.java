@@ -2,7 +2,6 @@ package com.koou.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.koou.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.koou.common.dto.ResultDto;
 import com.koou.common.factory.ResultDtoFactory;
+import com.koou.domain.User;
 import com.koou.dto.request.LoginRequestDto;
 import com.koou.service.AuthService;
 
@@ -50,7 +50,8 @@ public class AuthController {
     }
 
     @PostMapping(value = "/auth/register")
-    public void register(@RequestBody User addedUser) {
-        authService.register(addedUser);
+    public ResultDto<User> register(@RequestBody User addedUser) {
+        return ResultDtoFactory.toACK("success",
+                authService.register(addedUser));
     }
 }

@@ -1,16 +1,18 @@
 package com.koou.common.utils;
 
-import com.koou.model.JwtUser;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import com.koou.config.PropertyConfig;
+import com.koou.model.JwtUser;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  *
@@ -21,14 +23,11 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil {
 
-    private static final String CLAIM_KEY_USERNAME = "sub";
-    private static final String CLAIM_KEY_CREATED = "created";
+    private static final String CLAIM_KEY_USERNAME = PropertyConfig.JwtConfig.CLAIM_KEY_USERNAME;
+    private static final String CLAIM_KEY_CREATED = PropertyConfig.JwtConfig.CLAIM_KEY_CREATED;
+    private static final String SECRET = PropertyConfig.JwtConfig.SECRET;
+    private static final Long EXPIRATION = PropertyConfig.JwtConfig.EXPIRATION;
 
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.expiration}")
-    private Long expiration;
 
     public String getUsernameFromToken(String token) {
         String username;
@@ -67,7 +66,7 @@ public class JwtTokenUtil {
         Claims claims;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(SECRET)
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
@@ -77,7 +76,7 @@ public class JwtTokenUtil {
     }
 
     private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + expiration * 1000);
+        return new Date(System.currentTimeMillis() + EXPIRATION * 1000);
     }
 
     private Boolean isTokenExpired(String token) {
@@ -100,7 +99,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
     }
 

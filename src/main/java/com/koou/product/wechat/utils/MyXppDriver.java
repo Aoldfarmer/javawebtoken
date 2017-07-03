@@ -2,7 +2,8 @@ package com.koou.product.wechat.utils;
 
 import java.io.Reader;
 import java.io.Writer;
-import com.koou.common.utils.StringUtill;
+
+import com.koou.common.utils.StringUtil;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -21,7 +22,7 @@ public class MyXppDriver extends XppDriver {
     public HierarchicalStreamReader createReader(Reader reader) {
         return  new XppReader(reader){
             public String getNodeName(){
-                return StringUtill.lowerFirstChar(super.getNodeName());
+                return StringUtil.lowerFirstChar(super.getNodeName());
             }
         };
     }
@@ -32,7 +33,7 @@ public class MyXppDriver extends XppDriver {
             boolean cdata = true;  
             @SuppressWarnings("rawtypes")
 			public void startNode(String name, Class clazz) {
-                super.startNode(StringUtill.upperFirstChar(name), clazz);
+                super.startNode(StringUtil.upperFirstChar(name), clazz);
             }   
             protected void writeText(QuickWriter writer, String text) {
                 if (cdata) {

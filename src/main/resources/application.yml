@@ -23,7 +23,7 @@ spring:
 jwt:
   header: Authorization
   secret: mySecrets
-  expiration: 20
+  expiration: 2000
   tokenHead: "Bearer "
 
 

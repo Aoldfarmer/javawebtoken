@@ -30,7 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-resources/configuration/security"};
 
 
-    private String[] ignoreAuthPath = {"/auth", "/auth/**"};
+    private String[] ignoreAuthPath = {"/auth", "/auth/**", "/login", "/index", "/dashboard.html"};
+
+
+    private String[] ignoreFavicon = {"/favicon.ico"};
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -61,7 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         
-        web.ignoring().antMatchers(ignoreSwagger).antMatchers(ignoreAuthPath);
+        web.ignoring()
+                .antMatchers(ignoreSwagger)
+                .antMatchers(ignoreAuthPath)
+                .antMatchers(ignoreFavicon);
     }
 
     @Autowired

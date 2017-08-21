@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<link>
+    <meta charset="UTF-8"/>
+    <title>登陆页面</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- bootStrap CDN核心CSS文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-signin">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="button" id="sign">Sign in</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sign").click(function () {
+                var data = {
+                    'username': $("#inputEmail").val(),
+                    'password': $("#inputPassword").val()
+                };
+                console.log(JSON.stringify(data));
+                $.ajax({
+                    type: "POST",
+                    url: "/index",
+                    dataType: "json",
+                    contentType:'application/json;charset=UTF-8',
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        if (data.code = "ACK") {
+                            localStorage.setItem("token", data.data);
+                            location.href = "/dashboard";
+                        }
+                    },
+                    error: function(jqXHR) {
+
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

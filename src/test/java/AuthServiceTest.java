@@ -28,7 +28,7 @@ public class AuthServiceTest {
         String username = "yunqiangdi";
         String password = "admin";
         String token = authService.login(username, password);
-        logger.info("token = { }", token);
+        logger.info("token={}", token);
     }
 
 }

@@ -21,7 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * @since 2017-06-08 2:16 PM
  */
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtils {
 
     private static final String CLAIM_KEY_USERNAME = PropertyConfig.JwtConfig.CLAIM_KEY_USERNAME;
     private static final String CLAIM_KEY_CREATED = PropertyConfig.JwtConfig.CLAIM_KEY_CREATED;

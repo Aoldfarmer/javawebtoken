@@ -6,7 +6,7 @@ package com.koou.common.utils;
  * @version 1.0
  * @since 2017-06-29 7:10 PM
  */
-public class StringUtil {
+public class StringUtils {
 
     /**
      * 首字母大写

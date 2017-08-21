@@ -2,7 +2,7 @@ package com.koou.config;
 
 import org.springframework.core.env.Environment;
 
-import com.koou.common.utils.AppContextUtil;
+import com.koou.common.utils.AppContextUtils;
 
 /**
  *
@@ -12,7 +12,7 @@ import com.koou.common.utils.AppContextUtil;
  */
 public class PropertyConfig {
 
-    private static Environment ev = AppContextUtil.getBean(Environment.class);
+    private static Environment ev = AppContextUtils.getBean(Environment.class);
 
 
     public static class JwtConfig {

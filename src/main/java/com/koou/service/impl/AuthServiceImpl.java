@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.koou.common.utils.JwtTokenUtil;
+import com.koou.common.utils.JwtTokenUtils;
 import com.koou.config.PropertyConfig;
 import com.koou.domain.User;
 import com.koou.model.JwtUser;
@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtTokenUtils jwtTokenUtil;
     @Autowired
     private UserService userService;
 

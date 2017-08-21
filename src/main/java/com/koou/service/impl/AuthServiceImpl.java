@@ -1,6 +1,5 @@
 package com.koou.service.impl;
 
-import com.koou.config.PropertyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.koou.common.utils.JwtTokenUtil;
+import com.koou.config.PropertyConfig;
 import com.koou.domain.User;
 import com.koou.model.JwtUser;
 import com.koou.service.AuthService;
@@ -35,19 +35,13 @@ public class AuthServiceImpl implements AuthService {
     private UserService userService;
 
 
-
-
     @Override
-    public User register(User user) {
-        final String username = user.getUsername();
+    public User register(final String username, final String password) {
         if (userService.getByUsername(username) != null) {
             return null;
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        final String rawPassword = user.getPassword();
-        user.setPassword(encoder.encode(rawPassword));
-        userService.addUser(user);
-        return user;
+        return userService.addUser(username, encoder.encode(password));
     }
 
     @Override

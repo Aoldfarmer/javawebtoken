@@ -8,10 +8,11 @@
       <arg column="PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="LOGIN_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="LAST_PASSWORD_RESET_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="UUID" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    ID, USERNAME, PASSWORD, LOGIN_DATE, LAST_PASSWORD_RESET_DATE
+    ID, USERNAME, PASSWORD, LOGIN_DATE, LAST_PASSWORD_RESET_DATE, UUID
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,9 +26,11 @@
   </delete>
   <insert id="insert" parameterType="com.koou.domain.User">
     insert into user (ID, USERNAME, PASSWORD, 
-      LOGIN_DATE, LAST_PASSWORD_RESET_DATE)
+      LOGIN_DATE, LAST_PASSWORD_RESET_DATE, UUID
+      )
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{loginDate,jdbcType=TIMESTAMP}, #{lastPasswordResetDate,jdbcType=TIMESTAMP})
+      #{loginDate,jdbcType=TIMESTAMP}, #{lastPasswordResetDate,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.koou.domain.User">
     insert into user
@@ -47,6 +50,9 @@
       <if test="lastPasswordResetDate != null">
         LAST_PASSWORD_RESET_DATE,
       </if>
+      <if test="uuid != null">
+        UUID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -63,6 +69,9 @@
       </if>
       <if test="lastPasswordResetDate != null">
         #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -81,6 +90,9 @@
       <if test="lastPasswordResetDate != null">
         LAST_PASSWORD_RESET_DATE = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="uuid != null">
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -89,8 +101,8 @@
     set USERNAME = #{username,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
       LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
-      LAST_PASSWORD_RESET_DATE = #{lastPasswordResetDate,jdbcType=TIMESTAMP}
+      LAST_PASSWORD_RESET_DATE = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      UUID = #{uuid,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-
 </mapper>

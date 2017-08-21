@@ -12,4 +12,8 @@ import com.koou.model.UserInfo;
 public interface UserAdminMapper {
 
     UserInfo selectUserInfoByUsername(@Param("username") String username);
+
+    UserInfo selectUserInfoByUuid(@Param("uuid") String uuid);
+
+    int insertUser(@Param("username") String username, @Param("password") String password, @Param("uuid") String uuid);
 }

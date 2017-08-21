@@ -3,16 +3,18 @@ package com.koou.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.druid.util.StringUtils;
 import com.koou.common.dto.ResultDto;
 import com.koou.common.factory.ResultDtoFactory;
+import com.koou.config.PropertyConfig;
 import com.koou.domain.User;
 import com.koou.dto.request.LoginRequestDto;
+import com.koou.dto.request.RegisterRequestDto;
 import com.koou.service.AuthService;
 
 /**
@@ -22,12 +24,6 @@ import com.koou.service.AuthService;
  */
 @RestController
 public class AuthController {
-
-    @Value("${jwt.header}")
-    private String tokenHeader;
-
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
 
     @Autowired
     private AuthService authService;
@@ -40,18 +36,20 @@ public class AuthController {
 
     @GetMapping(value = "/refresh")
     public ResultDto<String> refreshAndGetAuthenticationToken(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader);
-        String refreshedToken = authService.refresh(token).substring(tokenHead.length());
-        if (refreshedToken == null) {
+        String token = request.getHeader(PropertyConfig.JwtConfig.TOKEN_HEADER);
+        String refreshedToken = authService.refresh(token);
+        if (StringUtils.isEmpty(refreshedToken)) {
             return ResultDtoFactory.toNACK(null);
         } else {
-            return ResultDtoFactory.toACK("success", token);
+            return ResultDtoFactory.toACK("success",
+                    refreshedToken.substring(PropertyConfig.JwtConfig.TOKEN_HEAD.length()));
         }
     }
 
     @PostMapping(value = "/auth/register")
-    public ResultDto<User> register(@RequestBody User addedUser) {
-        return ResultDtoFactory.toACK("success",
-                authService.register(addedUser));
+    public ResultDto<User> register(@RequestBody RegisterRequestDto registerRequestDto) {
+        String username = registerRequestDto.getUsername();
+        String password = registerRequestDto.getPassword();
+        return ResultDtoFactory.toACK("success", authService.register(username, password));
     }
 }

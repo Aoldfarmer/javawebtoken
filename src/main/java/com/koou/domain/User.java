@@ -14,14 +14,17 @@ public class User implements Serializable {
 
     private Date lastPasswordResetDate;
 
+    private String uuid;
+
     private static final long serialVersionUID = 1L;
 
-    public User(Long id, String username, String password, Date loginDate, Date lastPasswordResetDate) {
+    public User(Long id, String username, String password, Date loginDate, Date lastPasswordResetDate, String uuid) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.loginDate = loginDate;
         this.lastPasswordResetDate = lastPasswordResetDate;
+        this.uuid = uuid;
     }
 
     public User() {
@@ -68,6 +71,14 @@ public class User implements Serializable {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid == null ? null : uuid.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -84,7 +95,8 @@ public class User implements Serializable {
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getLoginDate() == null ? other.getLoginDate() == null : this.getLoginDate().equals(other.getLoginDate()))
-            && (this.getLastPasswordResetDate() == null ? other.getLastPasswordResetDate() == null : this.getLastPasswordResetDate().equals(other.getLastPasswordResetDate()));
+            && (this.getLastPasswordResetDate() == null ? other.getLastPasswordResetDate() == null : this.getLastPasswordResetDate().equals(other.getLastPasswordResetDate()))
+            && (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()));
     }
 
     @Override
@@ -96,6 +108,7 @@ public class User implements Serializable {
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getLoginDate() == null) ? 0 : getLoginDate().hashCode());
         result = prime * result + ((getLastPasswordResetDate() == null) ? 0 : getLastPasswordResetDate().hashCode());
+        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
         return result;
     }
 }

@@ -13,9 +13,11 @@ import com.koou.model.UserInfo;
  */
 public interface UserService {
 
-    void addUser(User user);
+    UserInfo addUser(String username, String password);
 
     User getById(long id);
+
+    UserInfo getByUUID(String uuid);
 
     UserInfo getByUsername(String username);
 }

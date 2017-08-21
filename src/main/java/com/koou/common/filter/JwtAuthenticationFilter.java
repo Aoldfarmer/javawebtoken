@@ -28,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtAuthenticationFilter implements Filter {
 
     private static UserDetailsService userDetailsService = AppContextUtil.getBean(UserDetailsService.class);
-
     private static JwtTokenUtil jwtTokenUtil = AppContextUtil.getBean(JwtTokenUtil.class);
 
 

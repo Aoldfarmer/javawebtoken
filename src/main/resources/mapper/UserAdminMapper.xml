@@ -6,6 +6,7 @@
     <result column="username" property="username"/>
     <result column="password" property="password"/>
     <result column="loginDate" property="loginDate"/>
+    <result column="uuid" property="uuid"/>
     <result column="lastPasswordResetDate" property="lastPasswordResetDate"/>
     <collection property="roles" ofType="string">
       <result column="role" property="role"/>
@@ -18,10 +19,31 @@
     u.PASSWORD as password,
     u.LOGIN_DATE as loginDate,
     o.ROLE as role,
+    u.UUID as uuid,
     u.LAST_PASSWORD_RESET_DATE as lastPasswordResetDate
     from user u
     left join user_role r on r.USER_ID = u.ID
     left join role o on o.id = r.ROLE_ID
     where u.USERNAME = #{username,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectUserInfoByUuid" parameterType="String" resultMap="UserInfoMap">
+    select
+    u.ID as id,
+    u.USERNAME as username,
+    u.PASSWORD as password,
+    u.LOGIN_DATE as loginDate,
+    o.ROLE as role,
+    u.UUID as uuid,
+    u.LAST_PASSWORD_RESET_DATE as lastPasswordResetDate
+    from user u
+    left join user_role r on r.USER_ID = u.ID
+    left join role o on o.id = r.ROLE_ID
+    where u.UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insertUser">
+    insert into user(USERNAME, PASSWORD, UUID)
+    values(#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR})
+  </insert>
 </mapper>

@@ -1,5 +1,7 @@
 package com.koou.service.impl;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +27,20 @@ public class UserServiceImpl implements UserService {
     private UserAdminMapper userAdminMapper;
 
     @Override
-    public void addUser(User user) {
-        userMapper.insert(user);
+    public UserInfo addUser(String username, String password) {
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        userAdminMapper.insertUser(username, password, uuid);
+        return new UserInfo(username, password, uuid);
     }
 
     @Override
     public User getById(long id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public UserInfo getByUUID(String uuid) {
+        return userAdminMapper.selectUserInfoByUuid(uuid);
     }
 
     @Override

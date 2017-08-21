@@ -30,10 +30,11 @@ public class UserController extends AbstractController {
 
     @GetMapping(value = "/{uuid}")
     @ApiOperation(value = "查询用户", httpMethod = "GET", notes = "查询用户")
-//    @PreAuthorize("hasRole('ADMIN')")
-    public ResultDto<UserInfo> getUser(@PathVariable String uuid) {
+    public ResultDto<UserInfo> getUser(@PathVariable("uuid") String uuid) {
         UserInfo userInfo = userService.getByUUID(uuid);
         return ResultDtoFactory.toACK("success", userInfo);
     }
+
+
 
 }

@@ -30,8 +30,12 @@ public class AuthController {
 
     @PostMapping(value = "/auth")
     public ResultDto<String> createAuthenticationToken(@RequestBody LoginRequestDto loginRequestDto) {
-        final String token = authService.login(loginRequestDto.getUsername(), loginRequestDto.getPassword());
-        return ResultDtoFactory.toACK("success", token);
+        try {
+            final String token = authService.login(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+            return ResultDtoFactory.toACK("success", token);
+        } catch (Exception e) {
+            return ResultDtoFactory.toNACK("认证失败");
+        }
     }
 
     @GetMapping(value = "/refresh")

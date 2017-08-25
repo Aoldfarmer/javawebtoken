@@ -1,5 +1,6 @@
 package com.koou.common.security.service;
 
+import com.koou.admin.base.service.UserService;
 import com.koou.common.factory.JwtUserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,8 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.koou.model.UserInfo;
-import com.koou.service.UserService;
+import com.koou.common.model.UserInfo;
 
 /**
  * @author yunqiangdi

@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.koou.config.PropertyConfig;
-import com.koou.model.JwtUser;
+import com.koou.common.config.PropertyConfig;
+import com.koou.common.model.JwtUser;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

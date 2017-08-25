@@ -11,7 +11,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @since 2017-05-07 下午 23:13
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.koou.repository")
+@MapperScan(basePackages = {"com.koou.common.repository", "com.koou.admin.base.repository"})
 public class Application {
 
 	public static void main(String[] args) {

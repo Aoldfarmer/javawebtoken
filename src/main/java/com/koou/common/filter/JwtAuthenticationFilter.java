@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
-import com.koou.common.utils.AppContextUtils;
+import com.koou.admin.AppContext;
 import com.koou.common.utils.JwtTokenUtils;
-import com.koou.config.PropertyConfig;
+import com.koou.common.config.PropertyConfig;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,8 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtAuthenticationFilter implements Filter {
 
-    private static UserDetailsService userDetailsService = AppContextUtils.getBean(UserDetailsService.class);
-    private static JwtTokenUtils jwtTokenUtil = AppContextUtils.getBean(JwtTokenUtils.class);
+    private static UserDetailsService userDetailsService = AppContext.getBean(UserDetailsService.class);
+    private static JwtTokenUtils jwtTokenUtil = AppContext.getBean(JwtTokenUtils.class);
 
 
     @Override

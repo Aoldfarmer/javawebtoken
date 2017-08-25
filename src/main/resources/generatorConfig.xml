@@ -23,7 +23,7 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.koou.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.koou.common.domain" targetProject="src/main/java">
             <property name="constructorBased" value="true" />
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
@@ -33,7 +33,7 @@
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.koou.repository"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.koou.common.repository"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>

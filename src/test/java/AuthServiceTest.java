@@ -1,5 +1,5 @@
 import com.koou.Application;
-import com.koou.service.AuthService;
+import com.koou.admin.base.service.AuthService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

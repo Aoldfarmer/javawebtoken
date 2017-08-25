@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.koou.repository.UserRoleMapper">
-  <resultMap id="BaseResultMap" type="com.koou.domain.UserRole">
+<mapper namespace="com.koou.common.repository.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.koou.common.domain.UserRole">
     <constructor>
       <arg column="USER_ID" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="ROLE_ID" javaType="java.lang.Long" jdbcType="BIGINT" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="com.koou.domain.UserRole">
+  <insert id="insert" parameterType="com.koou.common.domain.UserRole">
     insert into user_role (USER_ID, ROLE_ID)
     values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.koou.domain.UserRole">
+  <insert id="insertSelective" parameterType="com.koou.common.domain.UserRole">
     insert into user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">

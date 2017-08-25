@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.koou.repository.UserMapper">
-  <resultMap id="BaseResultMap" type="com.koou.domain.User">
+<mapper namespace="com.koou.common.repository.UserMapper">
+  <resultMap id="BaseResultMap" type="com.koou.common.domain.User">
     <constructor>
       <idArg column="ID" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="USERNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
     delete from user
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.koou.domain.User">
+  <insert id="insert" parameterType="com.koou.common.domain.User">
     insert into user (ID, USERNAME, PASSWORD, 
       LOGIN_DATE, LAST_PASSWORD_RESET_DATE, UUID
       )
@@ -32,7 +32,7 @@
       #{loginDate,jdbcType=TIMESTAMP}, #{lastPasswordResetDate,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.koou.domain.User">
+  <insert id="insertSelective" parameterType="com.koou.common.domain.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -75,7 +75,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.koou.domain.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.koou.common.domain.User">
     update user
     <set>
       <if test="username != null">
@@ -96,7 +96,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.koou.domain.User">
+  <update id="updateByPrimaryKey" parameterType="com.koou.common.domain.User">
     update user
     set USERNAME = #{username,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},

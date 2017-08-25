@@ -1,7 +1,7 @@
 package com.koou.common.factory;
 
-import com.koou.model.JwtUser;
-import com.koou.model.UserInfo;
+import com.koou.common.model.JwtUser;
+import com.koou.common.model.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
